@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from .models import Article, Course, Event, Category, QuranQuote
-
+from django.contrib.auth.views import LoginView
+from django.views.generic import TemplateView
+from django.urls import reverse_lazy
 # Home view
 def home(request):
     recent_articles = Article.objects.filter(published=True).order_by('-created_at')[:3]
@@ -101,3 +103,19 @@ def search(request):
         'results': results,
     }
     return render(request, 'content/search.html', context)
+class CustomLoginView(LoginView):
+    template_name = 'registration/login.html' # Custom template location
+    redirect_authenticated_user = True  # Redirects if already logged i
+success_url = reverse_lazy('home')
+
+def form_valid(self, form):
+        """Security check complete, log the user in"""
+        return super().form_valid(form)
+
+class HomeView(TemplateView):
+    template_name = 'content/home.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Add any additional context here
+        return context

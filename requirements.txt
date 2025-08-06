@@ -1,0 +1,8 @@
+Django==5.2.4
+django-tailwind
+django-extensions
+gunicorn
+whitenoise
+psycopg2-binary
+dj-database-url
+
