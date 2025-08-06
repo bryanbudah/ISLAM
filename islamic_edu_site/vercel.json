@@ -1,9 +1,0 @@
-{
-  "version": 2,
-  "builds": [
-    { "src": "islamic_edu_site/asgi.py", "use": "@vercel/python" }
-  ],
-  "routes": [
-    { "src": "/(.*)", "dest": "islamic_edu_site/asgi.py" }
-  ]
-}
